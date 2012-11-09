@@ -15,8 +15,8 @@ from access import ACCESS_KEY, ACCESS_SECRET
 def startAuth():
     #Firstly check if CK and CS are available
     if ((not CONSUMER_KEY) or (not CONSUMER_SECRET)):
-        print 'CCK ERROR, KEYS ARE NOT AVAILABLE ANYMORE'
-        print 'Please, register a new app on Twitter Developers'
+        print ('CCK ERROR, KEYS ARE NOT AVAILABLE ANYMORE')
+        print ('Please, register a new app on Twitter Developers')
     
     #If available, it starts a new OAuth handler
     auth = tweepy.OAuthHandler(CONSUMER_KEY,CONSUMER_SECRET)
@@ -32,7 +32,7 @@ def startAuth():
         #Else it start the authentication procedure
         auth_url = auth.get_authorization_url()
         webbrowser.open(auth_url)
-        print 'Write here the pin after browser authentication'
+        print ('Write here the pin after browser authentication')
         verifier = raw_input(' Insert PIN: ').strip()
         auth.get_access_token(verifier)
         
@@ -43,9 +43,9 @@ def startAuth():
         ak = 'ACCESS_KEY = "' + str(accessKey) + '"\n'
         aS = 'ACCESS_SECRET = "' + str(accessSecret) + '"\n'
         
-        print 'These are your personal keys'
-        print ak
-        print aS
+        print ('These are your personal keys')
+        print (ak)
+        print (aS)
         
         #It overwrites keys in the access file
         thispath = os.path.abspath(__file__)
@@ -56,7 +56,7 @@ def startAuth():
         accessfile.write(aS)
         accessfile.close()
     
-        print 'Your keys have been saved in', filePath, '\n \n'
+        print ('Your keys have been saved in', filePath, '\n \n')
         
         #Finally it calls itself to get the api object
         auth.set_access_token(accessKey,accessSecret)
