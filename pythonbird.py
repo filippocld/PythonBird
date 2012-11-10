@@ -107,18 +107,18 @@ def checkMatch():
 		badList += [match.screen_name]
 	
 	
-	print ()
+	print ''
 	print ('These are',myself.screen_name,"'s followings who followback \n")
 	for i in goodList:
 		print (i)
 	
-	print ()
+	print ''
 	print ('These are',myself.screen_name,"'s followings who don't followback \n")
 	for i in badList:
 		print (i)
 	
 	for i in matches[1]:
-		print ()
+		print ''
 		print ('Do you want to unfollow', i.screen_name,'?')
 		print ('Type "u" to unfollow, "x" to exit, any other to ignore')
 		answer = raw_input()
@@ -193,12 +193,12 @@ def fileSaveTweets(tweetsList):
 def begin():
 	
 	begin = 'R'
-	print ()
+	print ''
 	print ('==================================================')
 	print ('WELCOME TO PYTHONBIRD, A PYTHON-SHELL TWITTER TOOL')
 	print ('==================================================')
-	print ()
-	print ('Hello', myself.screen_name)
+	print ''
+	print 'Hello', myself.screen_name
 	print ('______________________________________________')
 	while(begin is 'R'):
 		print 'Do you want to unfollow (u), mass-DM (m) or save tweets(t)?'
