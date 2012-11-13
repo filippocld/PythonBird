@@ -190,35 +190,48 @@ def fileSaveTweets(tweetsList):
 	print ('File has been saved in '+str(thisPath)+'/tweet.txt\n')
 	return 	
 
+def update_status(tweet):
+        api.update_status(tweet)
+        return
+
 def begin():
-	
-	begin = 'R'
-	print ''
-	print ('==================================================')
-	print ('WELCOME TO PYTHONBIRD, A PYTHON-SHELL TWITTER TOOL')
-	print ('==================================================')
-	print ''
-	print 'Hello', myself.screen_name
-	print ('______________________________________________')
-	while(begin is 'R'):
-		print 'Do you want to unfollow (u), mass-DM (m) or save tweets(t)?'
-		answer = raw_input()
-		while (not ((answer is 'u') or (answer is 'm') or (answer is 't'))):
-			print ('Bad choice, try again: u = unfollow, m = mass-DM, t = save tweets')
-			answer = raw_input()
-	
-		if answer is 'u':
-			checkMatch()
-		elif answer is 'm':
-			massDM()
-		elif answer is 't':
-			timeline = getTweets()
-			fileSaveTweets(timeline)
-			
-		
-		print ('Type R to restart, X to exit')
-		begin = raw_input()
-	return
+        
+        begin = 'R'
+        print ''
+        print ('==================================================')
+        print ('WELCOME TO PYTHONBIRD, A PYTHON-SHELL TWITTER TOOL')
+        print ('==================================================')
+        print ''
+        print 'Hello', myself.screen_name
+        print ('______________________________________________')
+        while(begin is 'R'):
+                print 'Do you want to unfollow (u), mass-DM (m), update your status (t), or save tweets (s)?'
+                answer = raw_input()
+                while (not ((answer is 'u') or (answer is 'm') or (answer is 't') or (answer is 's'))):
+                        print ('Bad choice, try again: u = unfollow, m = mass-DM, t = update your status, s = save tweets')
+                        answer = raw_input()
+        
+                if answer is 'u':
+                        checkMatch()
+                        
+                elif answer is 'm':
+                        massDM()
+                        
+                elif answer is 't':
+                        tweet = raw_input("Insert your tweet: ")
+                        while len(tweet) > 140:
+                                print ("The tweet must be less or equal to 140 characters")
+                                tweet = raw_input("Insert your tweet: ")
+                        update_status(tweet)
+                        
+                elif answer is 's':
+                        timeline = getTweets()
+                        fileSaveTweets(timeline)
+                        
+                
+                print ('Type R to restart, X to exit')
+                begin = raw_input()
+        return
 		
 
 if __name__=="__main__":
