@@ -190,10 +190,33 @@ def fileSaveTweets(tweetsList):
 	print ('File has been saved in '+str(thisPath)+'/tweet.txt\n')
 	return 	
 
+#Sends a tweet
 def update_status(tweet):
         api.update_status(tweet)
         return
 
+#Creates a new list
+def create_list():
+        name = raw_input("Insert the name of the list you want to create: ")
+        description = raw_input("Insert the description of the list: ")
+        api.create_list(name, description)
+        print ("List created")
+        return
+
+#Adds a member to a list
+def add_list_member():
+        slug = raw_input("Which list? ")
+        user = raw_input("Which user do you want to add to the list? ")
+        api.add_list_member(slug, user)
+        return
+
+#Destroys a list
+def destroy_list():
+        slug = raw_input("Which list do you want to delete?")
+        api.destroy_list(slug)
+        print ("List deleted")
+        return
+        
 def begin():
         
         begin = 'R'
@@ -204,36 +227,51 @@ def begin():
         print ''
         print 'Hello', myself.screen_name
         print ('______________________________________________')
-        while(begin is 'R'):
-                print 'Do you want to unfollow (u), mass-DM (m), update your status (t), or save tweets (s)?'
-                answer = raw_input()
-                while (not ((answer is 'u') or (answer is 'm') or (answer is 't') or (answer is 's'))):
-                        print ('Bad choice, try again: u = unfollow, m = mass-DM, t = update your status, s = save tweets')
-                        answer = raw_input()
+        print ''
+        print 'What do you want to do?'
+        print ''
+        print '1. unfollow'
+        print '2. mass-DM'
+        print '3. send tweet'
+        print '4. save tweets'
+        print '5. create a list'
+        print '6. add users to a list'
+        print '7. delete a list'
+        while(begin is 'R' or begin is 'r'):
+                answer = input()
+                while (not ((answer == 1) or (answer == 2) or (answer == 3) or (answer == 4) or (answer == 5) or (answer == 6) or (answer == 7))):
+                        print ('Bad choice, try again: 1 = unfollow, 2 = mass-DM, 3 = update your status, 4 = save tweets, 5 = create a list, 6 = add users to a list, 7 = delete a list')
+                        answer = input()
         
-                if answer is 'u':
+                if answer == 1:
                         checkMatch()
                         
-                elif answer is 'm':
+                elif answer == 2:
                         massDM()
                         
-                elif answer is 't':
-                        tweet = raw_input("Insert your tweet: ")
-                        while len(tweet) > 140:
-                                print ("The tweet must be less or equal to 140 characters")
-                                tweet = raw_input("Insert your tweet: ")
-                        update_status(tweet)
+                elif answer == 3:
+                        update_status()
                         
-                elif answer is 's':
+                elif answer == 4:
                         timeline = getTweets()
                         fileSaveTweets(timeline)
-                        
-                
+
+                elif answer == 5:
+                        create_list()
+
+                elif answer == 6:
+                        add_list_member()
+
+                elif answer == 7:
+                        destroy_list()
+
                 print ('Type R to restart, X to exit')
                 begin = raw_input()
+                print ("What do you want to do, now?")
+                print ''
         return
-		
+                
 
 if __name__=="__main__":
-	begin()
-	
+        begin()
+        
