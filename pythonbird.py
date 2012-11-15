@@ -191,7 +191,11 @@ def fileSaveTweets(tweetsList):
 	return 	
 
 #Sends a tweet
-def update_status(tweet):
+def update_status():
+        tweet = raw_input("Insert your tweet: ")
+        while len(tweet) > 140:
+            print ("The tweet must be less or equal to 140 characters")
+            tweet = raw_input("Insert your tweet: ")
         api.update_status(tweet)
         return
 
